@@ -52,53 +52,37 @@
            <div id="main" style="width:100%; height:300px; padding-top:1rem">
 
            </div>
-
          </div>
-        <div class="totalCases">
-          <div class="paddingRight">
-              <div class="card">
-                <div class="card-content" >
-                  <p class="title is-4">
-                      Affected People
-                  </p>
-                  <p class="subtitle">
-                    {{confirmedCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
-                  </p>
+
+            <div class="columns" style="margin-top: 10px">
+                <div class="column totalCases">
+                    <p class="title is-4">
+                        Affected People
+                    </p>
+                    <p class="subtitle is-2">
+                        {{confirmedCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                    </p>
                 </div>
-
-              </div>
-          </div>
-          <div class="paddingRight">
-              <div class="card">
-                <div class="card-content" >
-                  <p class="title is-4">
-                    People Cured
-                  </p>
-                  <p class="subtitle" >
-                     {{recoveredCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
-                  </p>
+                <div class="column totalCases">
+                    <p class="title is-4">
+                        People Cured
+                    </p>
+                    <p class="subtitle is-2" >
+                        {{recoveredCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                    </p>
                 </div>
-
-              </div>
-          </div>
-          <div class="paddingRight">
-              <div class="card">
-                <div class="card-content">
-                  <p class="title is-4">
-                    People Died
-                  </p>
-                  <p class="subtitle">
-                    {{deathCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
-                  </p>
+                <div class="column totalCases">
+                    <p class="title is-4">
+                        People Died
+                    </p>
+                    <p class="subtitle is-2">
+                        {{deathCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                    </p>
                 </div>
-
-              </div>
-          </div>
-        </div>
-
+            </div>
 
            <div class="container">
-             <div class="columns" style="padding: 0rem 1rem 0rem 1rem">
+             <div class="columns" style="padding: 1rem 1rem 0rem 1rem">
 
                <div class="column mortalCases">
                  <div  style="height:400px; width:100% ;">
@@ -114,6 +98,15 @@
 
      </div>
     </section>
+
+
+  <section class="secondContent">
+      <div class="container">
+          <h1 class="title is-3">
+              Regional Corona Virus Outbreak
+          </h1>
+      </div>
+  </section>
 
   </div>
 </template>
@@ -332,6 +325,7 @@ export default {
     width:100%;
     height:80rem;
     background-color: #01132c;
+    margin-bottom: auto!important;
   }
 .confirmedCasesChart{
   width:100%;
@@ -351,6 +345,11 @@ export default {
   padding: 1rem 1rem 1rem 1rem;
   border-radius: 15px;
 }
-
+.secondContent{
+    padding: 0rem;
+    width:100%;
+    height:40rem;
+    background-color: #042554;
+}
 
 </style>
