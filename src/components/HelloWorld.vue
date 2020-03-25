@@ -44,10 +44,10 @@ export default {
 
                    //timestamp is in nanoseconds
                    ////convert timestamp to human readable form
-                    var arr_humanDate=[]
+                    var array_humanDate=[]
                     arr_x.forEach(function(arr){
-                    arr_humanDate = (new Date(arr/1000000)).toLocaleDateString();
-                    console.log(arr_humanDate);
+                    var arr_humanDate = (new Date(arr/1000000)).toLocaleDateString();
+                    array_humanDate.push(arr_humanDate)
 
                      myChart.setOption({
                        title: {
@@ -63,7 +63,7 @@ export default {
                        },
                        xAxis: {
                          name: 'Date',
-                         data: arr_x
+                         data: array_humanDate
                        },
                        yAxis: {
                          name: 'No. of patients'
