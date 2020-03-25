@@ -81,9 +81,7 @@
                 </div>
             </div>
 
-           <div class="container">
-             <div class="columns" style="padding: 1rem 1rem 0rem 1rem">
-
+             <div class="columns" style="padding: 1rem 0rem 0rem 0rem">
                <div class="column mortalCases">
                  <div  style="height:400px; width:100% ;">
                  </div>
@@ -94,7 +92,6 @@
                      </div>
                  </div>
              </div>
-           </div>
 
      </div>
     </section>
@@ -329,7 +326,7 @@ export default {
   }
 .confirmedCasesChart{
   width:100%;
-  height:350px;
+  height:20rem;
   background-color: white;
   padding:0rem 3rem 0rem 3rem;
   border-radius: 15px;
@@ -337,6 +334,7 @@ export default {
   .title.is-4{
     color: #01132c;
     padding-bottom: 1rem;
+    padding-top: 1rem;
   }
 
 .mortalCases{
