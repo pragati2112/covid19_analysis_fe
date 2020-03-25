@@ -21,16 +21,16 @@ $background:#042554;
 .card{
   width:23rem;
   padding-top:1rem;
-  border-radius: 25px;
-
+  border-radius: 15px;
 }
 
 .totalCases{
   float: left;
-  padding-top: 1rem;
+  padding-top: 0rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .paddingRight{
   padding: 10px;
 }
+

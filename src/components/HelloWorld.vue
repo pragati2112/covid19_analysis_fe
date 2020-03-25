@@ -62,7 +62,7 @@
                       Affected People
                   </p>
                   <p class="subtitle">
-                    {{confirmedCases}}
+                    {{confirmedCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
                   </p>
                 </div>
 
@@ -75,7 +75,7 @@
                     People Cured
                   </p>
                   <p class="subtitle" >
-                     {{recoveredCases}}
+                     {{recoveredCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
                   </p>
                 </div>
 
@@ -88,18 +88,32 @@
                     People Died
                   </p>
                   <p class="subtitle">
-                    {{deathCases}}
+                    {{deathCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
                   </p>
                 </div>
 
               </div>
           </div>
         </div>
-      </div>
 
+
+           <div class="container">
+             <div class="columns" style="padding: 0rem 1rem 0rem 1rem">
+
+               <div class="column mortalCases">
+                 <div  style="height:400px; width:100% ;">
+                 </div>
+               </div>
+
+                 <div class="column mortalCases" style="margin-left: 1rem">
+                     <div id="bar" style="height:400px; width:100% ;">
+                     </div>
+                 </div>
+             </div>
+           </div>
+
+     </div>
     </section>
-
-
 
   </div>
 </template>
@@ -128,6 +142,7 @@ export default {
     });
     this.totalCasesWorld();
     this.drawChart();
+    this.drawMortalityBarGraph();
   },
 
 
@@ -155,7 +170,7 @@ export default {
       drawChart(){
           // eslint-disable-next-line no-undef
           var myChart = echarts.init(document.getElementById('main'));
-        this.axiosInstance.get("/cases/confirmed")
+          this.axiosInstance.get("/cases/confirmed")
                 .then(response=>{
                   console.log(response.data)
                   var str=response.data;
@@ -239,6 +254,69 @@ export default {
 
       },
 
+
+    drawMortalityBarGraph(){
+      // eslint-disable-next-line no-undef
+      var myChart = echarts.init(document.getElementById('bar'));
+      this.axiosInstance.get("/perCountry/mortality")
+      .then(response=>{
+        console.log(response.data)
+        var str=response.data;
+        if (str.includes("\"")) {
+          var valid_str = JSON.parse(str);
+        }
+
+        var arr_x = valid_str.json_xax;
+        var arr_y = valid_str.json_yax;
+        console.log(arr_y,arr_x)
+
+        myChart.setOption(
+                 {
+                     title: {
+                         text: 'Mortality in Countries',
+                         subtext: '(World-wide)'
+                     },
+                     tooltip: {
+                         trigger: 'axis',
+                         axisPointer: {
+                             type: 'shadow'
+                         }
+                     },
+                     legend: {
+                         data: ['Mortality']
+                     },
+                     grid: {
+                         left: '3%',
+                         right: '4%',
+                         bottom: '3%',
+                         containLabel: true
+                     },
+                     xAxis: {
+                         type: 'value',
+                         boundaryGap: [0, 0.01]
+                     },
+                     yAxis: {
+                         type: 'category',
+                         data: arr_y
+                     },
+                     series: [
+                         {
+                             name: 'Mortality Rate',
+                             type: 'bar',
+                             data: arr_x,
+                             color:'#0071BB',
+                         },
+
+                     ]
+                }
+
+      )
+      }).catch(error=>{
+        console.log(error.response.data)
+      })
+
+    },
+
   }
 }
 </script>
@@ -252,7 +330,7 @@ export default {
 }
   .content{
     width:100%;
-    height:50rem;
+    height:80rem;
     background-color: #01132c;
   }
 .confirmedCasesChart{
@@ -260,10 +338,19 @@ export default {
   height:350px;
   background-color: white;
   padding:0rem 3rem 0rem 3rem;
-  border-radius: 25px;
+  border-radius: 15px;
 }
   .title.is-4{
     color: #01132c;
     padding-bottom: 1rem;
   }
+
+.mortalCases{
+  height:28rem;
+  background-color: white;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 15px;
+}
+
+
 </style>
